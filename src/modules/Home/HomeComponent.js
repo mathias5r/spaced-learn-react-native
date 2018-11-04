@@ -1,26 +1,16 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { FlatList } from 'react-native';
 import styled from 'styled-components';
-import LinearGradient from 'react-native-linear-gradient';
-import Carousel from 'react-native-snap-carousel';
+import ModuleComponent from '../Module/ModuleComponent';
+import { GRADIENTS } from '../../constants';
 
-const screenWidth = Dimensions.get(`window`).width;
-
-const Container = styled(LinearGradient)`
+const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
 `;
 
-const Item = styled.Text`
-  flex: 1;
-  background-color: white;
-  border-radius: 20;
-`;
-
-const CarouselView = styled.View`
-  height: 300;
-`;
+const ItemsView = styled.View``;
 
 const data = [
   {
@@ -35,19 +25,20 @@ const data = [
     id: 3,
     text: `português`,
   },
+  {
+    id: 3,
+    text: `biologia`,
+  },
 ];
 
 const HomeComponent = () => (
-  <Container colors={[`#23074d`, `#cc5333`]}>
-    <CarouselView>
-      <Carousel
+  <Container>
+    <ItemsView>
+      <FlatList
         data={data}
-        renderItem={({ item }) => <Item>{item.text}</Item>}
-        sliderWidth={screenWidth}
-        itemWidth={250}
+        renderItem={({ item, index }) => <ModuleComponent colors={GRADIENTS[index].colors} />}
       />
-    </CarouselView>
+    </ItemsView>
   </Container>
 );
-
 export default HomeComponent;
