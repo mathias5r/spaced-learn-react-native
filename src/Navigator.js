@@ -2,6 +2,7 @@ import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import React from 'react';
 import HomeScreen from './modules/Home/HomeComponent';
 import MenuScreen from './modules/Menu/MenuComponent';
+import LoginScreen from './modules/Login/LoginComponent';
 
 const DrawerStack = createDrawerNavigator(
   {
@@ -19,10 +20,11 @@ const DrawerStack = createDrawerNavigator(
 
 export default createStackNavigator(
   {
+    LoginScreen,
     DrawerStack,
   },
   {
-    initialRouteName: `DrawerStack`,
+    initialRouteName: `LoginScreen`,
     headerMode: `none`,
   },
 );
