@@ -1,6 +1,7 @@
 {
   "colors": {
     "form_underline": "white",
-    "form_text": "white"
+    "form_text": "white",
+    "button_text": "white"
   }
 }
