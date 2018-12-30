@@ -12,3 +12,7 @@ export const GRADIENTS = [
     colors: [`#52c234`, `#061700`],
   },
 ];
+
+export const ENDPOINTS = {
+  GRAPHQL: `localhost:27017/admin`,
+};

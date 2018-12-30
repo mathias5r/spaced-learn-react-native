@@ -1,5 +1,4 @@
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
-import React from 'react';
 import HomeScreen from './modules/Home/HomeComponent';
 import MenuScreen from './modules/Menu/MenuComponent';
 import LoginScreen from './modules/Login/LoginComponent';
