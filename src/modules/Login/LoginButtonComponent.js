@@ -24,8 +24,8 @@ const Text = styled.Text`
   font-size: 16;
 `;
 
-const LoginButtonComponent = ({ text }) => (
-  <LoginButton style={{ elevation: 4 }}>
+const LoginButtonComponent = ({ text, onPress }) => (
+  <LoginButton onPress={onPress} style={{ elevation: 4 }}>
     <ButtonGradient
       colors={[`#8a2387`, `#e94057`, `#f27121`]}
       start={{ x: 0, y: 0 }}
@@ -38,6 +38,7 @@ const LoginButtonComponent = ({ text }) => (
 
 LoginButtonComponent.propTypes = {
   text: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 export default withTheme(LoginButtonComponent);

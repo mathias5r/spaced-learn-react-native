@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import FormInputComponent from './FormInputComponent';
 import LoginButtonComponent from './LoginButtonComponent';
 
@@ -14,16 +15,18 @@ const FormView = styled.View`
   margin-bottom: 50;
 `;
 
-const LoginComponent = () => (
+const LoginComponent = ({ handleLoginRequest }) => (
   <Container>
     <FormView>
       <FormInputComponent type="email" placeholder="E-mail" />
       <FormInputComponent type="password" placeholder="Senha" />
     </FormView>
-    <LoginButtonComponent text="Login" />
+    <LoginButtonComponent onPress={handleLoginRequest} text="Login" />
   </Container>
 );
 
-LoginComponent.propTypes = {};
+LoginComponent.propTypes = {
+  handleLoginRequest: PropTypes.func.isRequired,
+};
 
 export default LoginComponent;
