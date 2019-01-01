@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots ConfirmComponent Initial 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 50,
+          "width": "80%",
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "position": "relative",
+          },
+          Array [
+            Object {
+              "borderBottomWidth": 1,
+            },
+            Object {
+              "borderColor": "white",
+            },
+          ],
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginTop": 21,
+            "paddingLeft": 9,
+            "position": "absolute",
+            "top": 7,
+          }
+        }
+      >
+        E-mail
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onEndEditing={[Function]}
+        onFocus={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "gray",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "color": "black",
+              "fontSize": 20,
+              "height": 40,
+              "justifyContent": "center",
+              "marginTop": 20,
+              "paddingLeft": 10,
+            },
+            Array [
+              Object {
+                "borderWidth": 0,
+                "fontSize": 14,
+              },
+              Object {
+                "color": "white",
+              },
+            ],
+          ]
+        }
+        underlineColorAndroid="transparent"
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "position": "relative",
+          },
+          Array [
+            Object {
+              "borderBottomWidth": 1,
+            },
+            Object {
+              "borderColor": "white",
+            },
+          ],
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginTop": 21,
+            "paddingLeft": 9,
+            "position": "absolute",
+            "top": 7,
+          }
+        }
+      >
+        Senha
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onEndEditing={[Function]}
+        onFocus={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "gray",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "color": "black",
+              "fontSize": 20,
+              "height": 40,
+              "justifyContent": "center",
+              "marginTop": 20,
+              "paddingLeft": 10,
+            },
+            Array [
+              Object {
+                "borderWidth": 0,
+                "fontSize": 14,
+              },
+              Object {
+                "color": "white",
+              },
+            ],
+          ]
+        }
+        underlineColorAndroid="transparent"
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "red",
+        "borderRadius": 20,
+        "elevation": 4,
+        "height": 50,
+        "opacity": 1,
+        "width": "80%",
+      }
+    }
+  >
+    <BVLinearGradient
+      colors={
+        Array [
+          4287243143,
+          4293476439,
+          4294078753,
+        ]
+      }
+      endPoint={
+        Object {
+          "x": 1,
+          "y": 1,
+        }
+      }
+      locations={null}
+      startPoint={
+        Object {
+          "x": 0,
+          "y": 0,
+        }
+      }
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 20,
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
+            "paddingLeft": 20,
+            "paddingRight": 20,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "white",
+              "fontSize": 16,
+            },
+          ]
+        }
+      >
+        Login
+      </Text>
+    </BVLinearGradient>
+  </View>
+</View>
+`;
