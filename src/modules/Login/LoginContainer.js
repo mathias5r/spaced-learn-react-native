@@ -1,34 +1,34 @@
 import gql from 'graphql-tag';
-import { compose, withHandlers } from 'recompose';
+import { compose, withState } from 'recompose';
 import LoginComponent from './LoginComponent';
 import apolloClient from '../../services/apollo/client';
+import withFormik from './LoginFormik';
 
 const LOGIN = gql`
-  mutation($email: String!, $password: String!, $credentials: String!) {
-    Login(email: $email, password: $password, credentials: $credentials)
+  mutation($email: String!, $password: String!) {
+    Login(email: $email, password: $password)
   }
 `;
 
 const makeLoginRequest = async () => {
-  const createLoginRequest = await apolloClient.mutate({
+  const { data } = await apolloClient.mutate({
     mutation: LOGIN,
     variables: {
       email: `mathiassilva4@gmail.com`,
-      password: `senha`,
-      credentials: `credenciais`,
+      password: `12345`,
     },
     fetchPolicy: `no-cache`,
   });
-  console.log(createLoginRequest.data);
+  return data;
 };
 
-const handleLoginRequest = () => () => {
-  console.log(`handleLoginRequest`);
+const onLoginPress = () => {
   makeLoginRequest();
 };
 
 export default compose(
-  withHandlers({
-    handleLoginRequest,
+  withFormik({
+    handleSubmit: onLoginPress,
+    displayName: `LoginForm`,
   }),
 )(LoginComponent);

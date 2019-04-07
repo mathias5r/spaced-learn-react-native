@@ -14,5 +14,5 @@ export const GRADIENTS = [
 ];
 
 export const ENDPOINTS = {
-  GRAPHQL: `http://192.168.25.239:8000/graphql`,
+  GRAPHQL: `http://localhost:8000/graphql`,
 };

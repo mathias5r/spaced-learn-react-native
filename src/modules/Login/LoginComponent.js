@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FormInputComponent from './FormInputComponent';
 import LoginButtonComponent from './LoginButtonComponent';
+import { t } from '../../locales/index';
 
 const Container = styled.View`
   flex: 1;
@@ -15,18 +16,37 @@ const FormView = styled.View`
   margin-bottom: 50;
 `;
 
-const LoginComponent = ({ handleLoginRequest }) => (
+const InputView = styled.View``;
+
+const AlertText = styled.Text`
+  padding-top: 5;
+  padding-left: 10;
+  color: red;
+`;
+
+const LoginComponent = ({ handleSubmit, handleChange, errors }) => (
   <Container>
     <FormView>
-      <FormInputComponent type="email" placeholder="E-mail" />
-      <FormInputComponent type="password" placeholder="Senha" />
+      <InputView>
+        <FormInputComponent placeholder="Usuário" onChangeText={handleChange(`user`)} />
+        {errors.user && <AlertText>{t(errors.user)}</AlertText>}
+      </InputView>
+      <InputView>
+        <FormInputComponent
+          placeholder="Senha"
+          onChangeText={handleChange(`password`)}
+          isSecureText
+        />
+        {errors.password && <AlertText>{t(errors.password)}</AlertText>}
+      </InputView>
     </FormView>
-    <LoginButtonComponent onPress={handleLoginRequest} text="Login" />
+    <LoginButtonComponent onPress={handleSubmit} text="Login" />
   </Container>
 );
 
 LoginComponent.propTypes = {
-  handleLoginRequest: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default LoginComponent;
