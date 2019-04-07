@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { withTheme } from 'styled-components';
 import { PropTypes } from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
+import { ActivityIndicator } from 'react-native';
 
 const LoginButton = styled.TouchableOpacity`
   width: 80%;
@@ -24,21 +25,26 @@ const Text = styled.Text`
   font-size: 16;
 `;
 
-const LoginButtonComponent = ({ text, onPress }) => (
+const LoginButtonComponent = ({ text, onPress, showLoading }) => (
   <LoginButton onPress={onPress} style={{ elevation: 4 }}>
     <ButtonGradient
       colors={[`#8a2387`, `#e94057`, `#f27121`]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
     >
-      <Text>{text}</Text>
+      {showLoading ? <ActivityIndicator color="#fff" /> : <Text>{text}</Text>}
     </ButtonGradient>
   </LoginButton>
 );
 
+LoginButtonComponent.defaultProps = {
+  showLoading: false,
+};
+
 LoginButtonComponent.propTypes = {
   text: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
+  showLoading: PropTypes.bool,
 };
 
 export default withTheme(LoginButtonComponent);

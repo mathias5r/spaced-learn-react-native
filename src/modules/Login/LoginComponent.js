@@ -24,7 +24,7 @@ const AlertText = styled.Text`
   color: red;
 `;
 
-const LoginComponent = ({ handleSubmit, handleChange, errors }) => (
+const LoginComponent = ({ handleSubmit, handleChange, errors, isLoginLoadingShown }) => (
   <Container>
     <FormView>
       <InputView>
@@ -40,13 +40,15 @@ const LoginComponent = ({ handleSubmit, handleChange, errors }) => (
         {errors.password && <AlertText>{t(errors.password)}</AlertText>}
       </InputView>
     </FormView>
-    <LoginButtonComponent onPress={handleSubmit} text="Login" />
+    <LoginButtonComponent onPress={handleSubmit} text="Login" showLoading={isLoginLoadingShown} />
   </Container>
 );
 
 LoginComponent.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  isLoginLoadingShown: PropTypes.bool.isRequired,
 };
 
 export default LoginComponent;

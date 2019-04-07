@@ -22,11 +22,13 @@ const makeLoginRequest = async () => {
   return data;
 };
 
-const onLoginPress = () => {
+const onLoginPress = (values, { props: { setLoginLoadingVisibility } }) => {
+  setLoginLoadingVisibility(true);
   makeLoginRequest();
 };
 
 export default compose(
+  withState(`isLoginLoadingShown`, `setLoginLoadingVisibility`, false),
   withFormik({
     handleSubmit: onLoginPress,
     displayName: `LoginForm`,
