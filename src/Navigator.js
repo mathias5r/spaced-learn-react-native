@@ -1,7 +1,7 @@
 import { createDrawerNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from './modules/Home/HomeComponent';
 import MenuScreen from './modules/Menu/MenuComponent';
-import LoginScreen from './modules/Login/LoginContainer';
+import LoginScreen from './modules/Login/LoginComponent';
 
 const DrawerStack = createDrawerNavigator(
   {

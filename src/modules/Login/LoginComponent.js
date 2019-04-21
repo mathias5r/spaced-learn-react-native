@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { Formik } from 'formik';
 import FormInputComponent from './FormInputComponent';
 import LoginButtonComponent from './LoginButtonComponent';
 import { t } from '../../locales/index';
+import { loginValidationSchema, makeLoginRequest } from './LoginServices';
 
 const Container = styled.View`
   flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+const FormikView = styled.View`
+  flex: 1;
+  width: 100%;
   justify-content: center;
   align-items: center;
 `;
@@ -24,31 +32,46 @@ const AlertText = styled.Text`
   color: red;
 `;
 
-const LoginComponent = ({ handleSubmit, handleChange, errors, isLoginLoadingShown }) => (
-  <Container>
-    <FormView>
-      <InputView>
-        <FormInputComponent placeholder="Usuário" onChangeText={handleChange(`user`)} />
-        {errors.user && <AlertText>{t(errors.user)}</AlertText>}
-      </InputView>
-      <InputView>
-        <FormInputComponent
-          placeholder="Senha"
-          onChangeText={handleChange(`password`)}
-          isSecureText
-        />
-        {errors.password && <AlertText>{t(errors.password)}</AlertText>}
-      </InputView>
-    </FormView>
-    <LoginButtonComponent onPress={handleSubmit} text="Login" showLoading={isLoginLoadingShown} />
-  </Container>
-);
+const LoginComponent = () => {
+  const [isLoginLoadingShown, setLoginLoadingVisibility] = useState(false);
 
-LoginComponent.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  errors: PropTypes.shape({}).isRequired,
-  isLoginLoadingShown: PropTypes.bool.isRequired,
+  return (
+    <Container>
+      <Formik
+        onSubmit={values => {
+          console.log(values);
+          setLoginLoadingVisibility(true);
+          makeLoginRequest();
+        }}
+        validationSchema={loginValidationSchema}
+        render={({ handleChange, errors, handleSubmit }) => {
+          return (
+            <FormikView>
+              <FormView>
+                <InputView>
+                  <FormInputComponent placeholder="Usuário" onChangeText={handleChange(`user`)} />
+                  {errors.user && <AlertText>{t(errors.user)}</AlertText>}
+                </InputView>
+                <InputView>
+                  <FormInputComponent
+                    placeholder="Senha"
+                    onChangeText={handleChange(`password`)}
+                    isSecureText
+                  />
+                  {errors.password && <AlertText>{t(errors.password)}</AlertText>}
+                </InputView>
+              </FormView>
+              <LoginButtonComponent
+                onPress={handleSubmit}
+                text="Login"
+                showLoading={isLoginLoadingShown}
+              />
+            </FormikView>
+          );
+        }}
+      />
+    </Container>
+  );
 };
 
 export default LoginComponent;
