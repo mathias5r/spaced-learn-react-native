@@ -27,10 +27,10 @@ const FormInputComponent = ({ theme, placeholder, onChangeText, isSecureText }) 
 );
 
 FormInputComponent.defaultProps = {
-  placeholder: '',
+  placeholder: ``,
   onChangeText: () => {},
   isSecureText: false,
-}
+};
 
 FormInputComponent.propTypes = {
   theme: PropTypes.shape({}).isRequired,
