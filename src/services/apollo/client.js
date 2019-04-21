@@ -3,6 +3,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
+import fetch from 'cross-fetch';
 import { ENDPOINTS } from '../../constants';
 
 const cache = new InMemoryCache();
@@ -18,7 +19,7 @@ const errorLink = onError((networkError, graphQLErrors) => {
   }
 });
 
-const link = ApolloLink.from([errorLink, new HttpLink({ uri: ENDPOINTS.GRAPHQL })]);
+const link = ApolloLink.from([errorLink, new HttpLink({ uri: ENDPOINTS.GRAPHQL, fetch })]);
 
 export default new ApolloClient({
   link,

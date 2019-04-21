@@ -11,10 +11,18 @@ const normalizeTranslate = {
   pt_US: `pt_BR`,
 };
 
-const getLanguageByDevice = () => {
-  return Platform.OS === `ios`
+const getIOSLanguage = () => {
+  return NativeModules.SettingsManager
     ? NativeModules.SettingsManager.settings.AppleLocale
-    : NativeModules.I18nManager.localeIdentifier;
+    : `pt_US`;
+};
+
+const getAndroidLanguage = () => {
+  return NativeModules.I18nManager ? NativeModules.I18nManager.localeIdentifier : `pt_BR`;
+};
+
+const getLanguageByDevice = () => {
+  return Platform.OS === `ios` ? getIOSLanguage() : getAndroidLanguage();
 };
 
 I18n.translations = {
