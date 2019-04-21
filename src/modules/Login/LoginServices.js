@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import * as Yup from 'yup';
+import { not, isEmpty } from 'ramda';
 import apolloClient from '../../services/apollo/client';
 
 export const loginValidationSchema = () =>
@@ -11,19 +12,37 @@ export const loginValidationSchema = () =>
   });
 
 const LOGIN = gql`
-  mutation($email: String!, $password: String!) {
-    Login(email: $email, password: $password)
+  mutation($user: String!, $password: String!) {
+    Login(user: $user, password: $password) {
+      value
+      token
+    }
   }
 `;
 
-export const makeLoginRequest = async () => {
+const makeLoginRequest = async ({ user, password }) => {
   const { data } = await apolloClient.mutate({
     mutation: LOGIN,
     variables: {
-      email: `mathiassilva4@gmail.com`,
-      password: `12345`,
+      user: user.toLowerCase(),
+      password,
     },
     fetchPolicy: `no-cache`,
   });
   return data;
+};
+
+export const doLoginRequest = ({ values, setLoginLoadingVisibility, navigate }) => {
+  makeLoginRequest(values)
+    .then(({ Login }) => {
+      const { value, token } = Login;
+      if (value === `sucessfully_loged` && not(isEmpty(token))) {
+        navigate(`Home`);
+      }
+      setLoginLoadingVisibility(false);
+    })
+    .catch(err => {
+      console.log(err);
+      setLoginLoadingVisibility(false);
+    });
 };

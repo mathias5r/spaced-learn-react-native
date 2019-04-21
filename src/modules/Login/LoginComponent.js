@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
+import { useNavigation } from 'react-navigation-hooks';
 import FormInputComponent from './FormInputComponent';
 import LoginButtonComponent from './LoginButtonComponent';
 import { t } from '../../locales/index';
-import { loginValidationSchema, makeLoginRequest } from './LoginServices';
+import { loginValidationSchema, doLoginRequest } from './LoginServices';
 
 const Container = styled.View`
   flex: 1;
@@ -34,14 +35,13 @@ const AlertText = styled.Text`
 
 const LoginComponent = () => {
   const [isLoginLoadingShown, setLoginLoadingVisibility] = useState(false);
-
+  const { navigate } = useNavigation();
   return (
     <Container>
       <Formik
         onSubmit={values => {
-          console.log(values);
           setLoginLoadingVisibility(true);
-          makeLoginRequest();
+          doLoginRequest({ values, setLoginLoadingVisibility, navigate });
         }}
         validationSchema={loginValidationSchema}
         render={({ handleChange, errors, handleSubmit }) => {
