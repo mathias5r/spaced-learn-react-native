@@ -47,6 +47,7 @@ module.exports = {
     "jest": true
   },
   "globals": { 
-    "fetch": false 
+    "fetch": false, 
+    "__DEV__": true
   } 
 };

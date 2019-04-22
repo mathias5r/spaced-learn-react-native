@@ -16,3 +16,5 @@ export const GRADIENTS = [
 export const ENDPOINTS = {
   GRAPHQL: `http://localhost:8000/graphql`,
 };
+
+export const isProduction = !__DEV__;

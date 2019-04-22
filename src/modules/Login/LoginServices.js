@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 import * as Yup from 'yup';
 import { not, isEmpty } from 'ramda';
 import apolloClient from '../../services/apollo/client';
+import { saveItem, getItem } from '../../services/storage';
 
 export const loginValidationSchema = () =>
   Yup.object().shape({
@@ -42,12 +43,13 @@ export const doLoginRequest = ({
     .then(({ Login }) => {
       const { value, token } = Login;
       if (value === `sucessfully_loged` && not(isEmpty(token))) {
+        saveItem({ key: `token`, value: token });
         navigate(`Home`);
       }
       setLoginLoadingVisibility(false);
+      getItem({ key: `token` }).then(data => console.log(data));
     })
     .catch(err => {
-      console.log(err.graphQLErrors[0].message);
       if (err.graphQLErrors && err.graphQLErrors[0]) {
         setLoginErrorAlert(err.graphQLErrors[0].message);
       } else {
