@@ -33,15 +33,20 @@ const AlertText = styled.Text`
   color: red;
 `;
 
+const ErrorView = styled.View`
+  padding: 20px;
+`;
+
 const LoginComponent = () => {
   const [isLoginLoadingShown, setLoginLoadingVisibility] = useState(false);
+  const [loginErrorAlert, setLoginErrorAlert] = useState(false);
   const { navigate } = useNavigation();
   return (
     <Container>
       <Formik
         onSubmit={values => {
           setLoginLoadingVisibility(true);
-          doLoginRequest({ values, setLoginLoadingVisibility, navigate });
+          doLoginRequest({ values, setLoginLoadingVisibility, setLoginErrorAlert, navigate });
         }}
         validationSchema={loginValidationSchema}
         render={({ handleChange, errors, handleSubmit }) => {
@@ -61,6 +66,9 @@ const LoginComponent = () => {
                   {errors.password && <AlertText>{t(errors.password)}</AlertText>}
                 </InputView>
               </FormView>
+              <ErrorView>
+                {loginErrorAlert && <AlertText>{t(loginErrorAlert)}</AlertText>}
+              </ErrorView>
               <LoginButtonComponent
                 onPress={handleSubmit}
                 text="Login"

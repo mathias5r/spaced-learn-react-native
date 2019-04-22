@@ -32,7 +32,12 @@ const makeLoginRequest = async ({ user, password }) => {
   return data;
 };
 
-export const doLoginRequest = ({ values, setLoginLoadingVisibility, navigate }) => {
+export const doLoginRequest = ({
+  values,
+  setLoginLoadingVisibility,
+  setLoginErrorAlert,
+  navigate,
+}) => {
   makeLoginRequest(values)
     .then(({ Login }) => {
       const { value, token } = Login;
@@ -42,7 +47,12 @@ export const doLoginRequest = ({ values, setLoginLoadingVisibility, navigate }) 
       setLoginLoadingVisibility(false);
     })
     .catch(err => {
-      console.log(err);
+      console.log(err.graphQLErrors[0].message);
+      if (err.graphQLErrors && err.graphQLErrors[0]) {
+        setLoginErrorAlert(err.graphQLErrors[0].message);
+      } else {
+        setLoginErrorAlert(`network_error`);
+      }
       setLoginLoadingVisibility(false);
     });
 };
