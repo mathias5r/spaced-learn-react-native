@@ -45,16 +45,14 @@ export const doLoginRequest = ({
       if (value === `sucessfully_loged` && not(isEmpty(token))) {
         saveItem({ key: `token`, value: token });
         navigate(`Home`);
+      } else {
+        setLoginErrorAlert(`user_not_found`);
       }
       setLoginLoadingVisibility(false);
-      getItem({ key: `token` }).then(data => console.log(data));
+      // getItem({ key: `token` }).then(data => console.log(data));
     })
-    .catch(err => {
-      if (err.graphQLErrors && err.graphQLErrors[0]) {
-        setLoginErrorAlert(err.graphQLErrors[0].message);
-      } else {
-        setLoginErrorAlert(`network_error`);
-      }
+    .catch(() => {
+      setLoginErrorAlert(`login_error`);
       setLoginLoadingVisibility(false);
     });
 };
