@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ModuleComponent from '../Module/ModuleComponent';
 import { GRADIENTS } from '../../constants';
 
-const Container = styled.View`
+const BasicView = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -32,13 +32,13 @@ const data = [
 ];
 
 const HomeComponent = () => (
-  <Container>
+  <BasicView>
     <ItemsView>
       <FlatList
         data={data}
         renderItem={({ item, index }) => <ModuleComponent colors={GRADIENTS[index].colors} />}
       />
     </ItemsView>
-  </Container>
+  </BasicView>
 );
 export default HomeComponent;

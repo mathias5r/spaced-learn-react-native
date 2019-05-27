@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import * as Yup from 'yup';
 import { not, isEmpty } from 'ramda';
 import apolloClient from '../../services/apollo/client';
-import { saveItem, getItem } from '../../services/storage';
+import { saveItem } from '../../services/storage';
 
 export const loginValidationSchema = () =>
   Yup.object().shape({
@@ -21,8 +21,8 @@ const LOGIN = gql`
   }
 `;
 
-const makeLoginRequest = async ({ user, password }) => {
-  const { data } = await apolloClient.mutate({
+const makeLoginRequest = async ({ user, password }) =>
+  apolloClient.mutate({
     mutation: LOGIN,
     variables: {
       user: user.toLowerCase(),
@@ -30,8 +30,6 @@ const makeLoginRequest = async ({ user, password }) => {
     },
     fetchPolicy: `no-cache`,
   });
-  return data;
-};
 
 export const doLoginRequest = ({
   values,
@@ -39,19 +37,19 @@ export const doLoginRequest = ({
   setLoginErrorAlert,
   navigate,
 }) => {
+  setLoginLoadingVisibility(true);
   makeLoginRequest(values)
-    .then(({ Login }) => {
-      const { value, token } = Login;
+    .then(({ data }) => {
+      const { value, token } = data.Login;
       if (value === `sucessfully_loged` && not(isEmpty(token))) {
-        saveItem({ key: `token`, value: token });
-        navigate(`Home`);
+        saveItem({ key: `token`, value: token }).then(() => navigate(`Home`));
       } else {
         setLoginErrorAlert(`user_not_found`);
       }
       setLoginLoadingVisibility(false);
-      // getItem({ key: `token` }).then(data => console.log(data));
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err);
       setLoginErrorAlert(`login_error`);
       setLoginLoadingVisibility(false);
     });

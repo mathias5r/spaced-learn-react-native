@@ -2,6 +2,7 @@ import { createDrawerNavigator, createStackNavigator, createAppContainer } from 
 import HomeScreen from './modules/Home/HomeComponent';
 import MenuScreen from './modules/Menu/MenuComponent';
 import LoginScreen from './modules/Login/LoginComponent';
+import LoadingScreen from './modules/Loading/LoadingComponent';
 
 const DrawerStack = createDrawerNavigator(
   {
@@ -19,11 +20,16 @@ const DrawerStack = createDrawerNavigator(
 
 const RootStack = createStackNavigator(
   {
-    LoginScreen,
+    Loading: {
+      screen: LoadingScreen,
+    },
+    Login: {
+      screen: LoginScreen,
+    },
     DrawerStack,
   },
   {
-    initialRouteName: `LoginScreen`,
+    initialRouteName: `Loading`,
     headerMode: `none`,
   },
 );

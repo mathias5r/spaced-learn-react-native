@@ -62,7 +62,6 @@ const LoginComponent = () => {
       <PositioningView>
         <Formik
           onSubmit={values => {
-            setLoginLoadingVisibility(true);
             doLoginRequest({ values, setLoginLoadingVisibility, setLoginErrorAlert, navigate });
           }}
           validationSchema={loginValidationSchema}
