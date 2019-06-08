@@ -21,15 +21,15 @@ const errorLink = onError((networkError, graphQLErrors) => {
   }
 });
 
-const authLink = setContext(async () => {
+const authLink = setContext(async () =>
   getItem({ key: `token` }).then(token => {
     return {
       headers: {
         authorization: token || ``,
       },
     };
-  });
-});
+  }),
+);
 
 const link = ApolloLink.from([
   errorLink,
