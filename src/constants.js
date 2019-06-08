@@ -1,3 +1,8 @@
+import { Dimensions, Platform } from 'react-native';
+
+export const SCREEN_WIDTH = Dimensions.get(`window`).width;
+export const SCREEN_HEIGHT = Dimensions.get(`window`).height;
+
 export const GRADIENTS = [
   {
     colors: [`#8a2387`, `#e94057`, `#f27121`],
@@ -18,3 +23,6 @@ export const ENDPOINTS = {
 };
 
 export const isProduction = !__DEV__;
+
+export const IS_IOS = Platform.OS === `ios`;
+export const IS_ANDROID = Platform.OS === `android`;
